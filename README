@@ -1,0 +1,25 @@
+This is the CSAIL Puppet module for BIND.
+
+It was created by Garrett Wollman <wollman@csail.mit.edu>
+after looking at the umpteen other BIND modules and being
+utterly unsatisfied as a result of either fundamental
+portability failures or underlying design errors.
+
+The following are the goals for this module:
+
+- Successfully configure BIND in both recursive resolver and
+  authoritative name server modes.
+
+- Support views, at least to the extent that a name server
+  can be configured to have a local caching resolver despite
+  also being authoritative for some non-empty zones.
+
+- Work on multiple platforms.
+
+- Fully support DNSsec (public-key) and TSIG (shared-key)
+  authentication for the relevant services.
+
+The following are explicit non-goals for this module:
+
+- Generating zone files.  Zone files are not configuration,
+  and come from a provisioning database.
