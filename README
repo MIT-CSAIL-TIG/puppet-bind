@@ -1,3 +1,5 @@
+INTRODUCTION
+============
 This is the CSAIL Puppet module for BIND.
 
 It was created by Garrett Wollman <wollman@csail.mit.edu>
@@ -29,3 +31,9 @@ The following are explicit non-goals for this module:
 It uses the hiera-module-data pattern; in order to use it, you will
 need to have configured "module_data" as a backend in hiera.yaml on
 all of your Puppet masters.
+
+PREREQUISITES
+=============
+- R.I. Pienaar's "module_data" module
+- PuppetLabs "stdlib" and "concat" modules
+- Others that we haven't identified yet
