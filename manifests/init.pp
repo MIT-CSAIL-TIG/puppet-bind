@@ -24,11 +24,14 @@ class bind ($ensure = 'present', $tools_only) {
   } else {
     anchor { 'bind::begin':
     } -> class { 'bind::package':
+      ensure => $ensure,
     } -> class { 'bind::tools':
       ensure => $ensure,
       installing_server => true,
     } -> class { 'bind::config':
+      ensure => $ensure,
     } -> class { 'bind::service':
+      ensure => $ensure,
     } -> anchor { 'bind::end':
     }
   }
