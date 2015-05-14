@@ -2,7 +2,7 @@
 # Install the BIND server package(s) and, if desired, documentation.
 #
 class bind::package ($ensure, $packages, $install_documentation,
-		     $documentation_packages) {
+		     $documentation_packages = []) {
   package { $packages:
     ensure => $ensure,
   }
