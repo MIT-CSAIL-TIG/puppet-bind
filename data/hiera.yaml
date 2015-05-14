@@ -1,0 +1,5 @@
+---
+:hierarchy:
+- lsbdistcodename/%{::lsbdistcodename}
+- osfamily/%{::osfamily}
+- common

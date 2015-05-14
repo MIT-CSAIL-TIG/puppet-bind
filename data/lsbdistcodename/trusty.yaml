@@ -1,0 +1,6 @@
+---
+bind::package::packages:
+- bind9
+bind::package::version: "9.9"
+bind::package::documentation_packages:
+- bind9-doc

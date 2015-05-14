@@ -1,0 +1,10 @@
+---
+# Defaults for the bind module on all systems.  Many of these will be
+# overridden by more specific configuration in the osfamily or
+# lsbdistcodename subdirectories.
+bind::tools_only: false
+
+bind::package::install_documentation: true
+bind::package::documentation_packages: []
+
+bind::tools::tools_conflict_with_server: false

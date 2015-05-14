@@ -19,7 +19,13 @@ The following are the goals for this module:
 - Fully support DNSsec (public-key) and TSIG (shared-key)
   authentication for the relevant services.
 
+- As much configuration as practical represented in hiera data.
+
 The following are explicit non-goals for this module:
 
 - Generating zone files.  Zone files are not configuration,
   and come from a provisioning database.
+
+It uses the hiera-module-data pattern; in order to use it, you will
+need to have configured "module_data" as a backend in hiera.yaml on
+all of your Puppet masters.

@@ -1,0 +1,14 @@
+---
+# Common pathnames
+bind::config::directory: "/usr/local/etc/namedb"
+bind::config::keys: "keys"
+
+bind::package::packages:
+- bind910
+bind::package::version: "9.10"
+
+bind::service::name: named
+
+bind::tools::packages:
+- bind-tools
+bind::tools::tools_conflict_with_server: true
