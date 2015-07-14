@@ -16,6 +16,22 @@
 # IP addresses.  Finally, there are keys and log destinations,
 # and how they work has yet to be defined.
 #
-class bind::config ($ensure) {
-  # Actually do nothing yet.
+class bind::config ($ensure, $directory, $root_hints, $install_root_hints) {
+
+  # Normally assume that the BIND package will include an up-to-date
+  # root hint file, and require explicit configuration to replace it
+  # with a different version.  You might want to do this if for some
+  # reason you are stuck with an outdated BIND package (in which case
+  # I hope you're not exposed to the Internet) that has bad hints
+  # in it.  (And even then, under normal circumstances all you need is
+  # just one of the 13 root servers to work!)
+  if $install_root_hints {
+    file {$root_hints:
+      ensure => $ensure,
+      owner  => root,
+      group  => 0,
+      mode   => '0444',
+      source => 'puppet:///modules/bind/root.hints',
+    }
+  }
 }

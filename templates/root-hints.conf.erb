@@ -1,0 +1,7 @@
+
+// There are two ways you might handle the root zone.  The traditional
+// way is to use a hints file, which is what we implement here.  The
+// other way you could do it is by shadow-secondarying the root zone
+// (ICANN has specific servers configured to allow zone transfers for
+// that reason).
+zone "." { type hint; file "<%= @root_hints %>"; };

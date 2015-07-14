@@ -1,0 +1,16 @@
+; This "empty" zone is taken from the FreeBSD "bind910" package, but
+; should be equivalent to that distributed by all major packagers of
+; BIND.  It's not actually empty for technical reasons (BIND won't
+; serve a zone file that's truly empty, and every zone must contain
+; an SOA record).
+
+; $FreeBSD: head/dns/bind910/files/empty.db 340872 2014-01-24 00:14:07Z mat $
+
+$TTL 3h
+@ SOA @ nobody.localhost. 42 1d 12h 1w 3h
+	; Serial, Refresh, Retry, Expire, Neg. cache TTL
+
+@	NS	@
+
+; Silence a BIND warning
+@	A	127.0.0.1

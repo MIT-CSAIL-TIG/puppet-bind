@@ -2,3 +2,5 @@
 bind::tools::packages:
 - bind9-host
 - dnsutils
+
+bind::config::root_hints: "/etc/bind/db.root"
