@@ -14,6 +14,7 @@ define bind::view ($view = $name, $ensure = 'present',
 		   $notify = undef,
 		   $also_notify = undef,
 		   $zone_defaults = {},
+		   $extra = undef,
 		  ) {
   include bind::config
   $view_config = "${bind::config::directory}/${view}.conf"

@@ -54,3 +54,8 @@ view "%<= @view %>" {
 <%   end -%>
 	}
 <% end -%>
+<% unless @extra.nil? -%>
+<%   @extra.each_line do |line| -%>
+	<%= line -%>
+<%   end -%>
+<% end -%>
