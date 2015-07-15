@@ -1,0 +1,26 @@
+	zone "<%= @zone %>" {
+		type master;
+		file "<%= @source %>";
+<% unless @notify.nil? -%>
+		notify <%= @notify ? "yes" : "no" %>;
+<% end -%>
+<% if @also_notify -%>
+		also-notify {
+<%   @also_notify.each do |dest| -%>
+			<%= dest %>;
+<%   end -%>
+		};
+<% end -%>
+<% if @inline_signing -%>
+		key-directory "<%= @key_directory %>";
+		auto-dnssec maintain;
+		inline-signing yes;
+<% end -%>
+<% if @allow_transfer.length > 0 -%>
+		allow-transfer {
+<%   @allow_transfer.each do |dest| -%>
+			<%= dest %>;
+<%   end -%>
+		}
+<% end -%>
+	};

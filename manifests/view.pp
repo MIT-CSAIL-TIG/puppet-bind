@@ -11,6 +11,9 @@ define bind::view ($view = $name, $ensure = 'present',
 		   $dnssec_validation = undef,
 		   $dnssec_lookaside = undef,
 		   $allow_transfer = undef,
+		   $notify = undef,
+		   $also_notify = undef,
+		   $zone_defaults = {},
 		  ) {
   include bind::config
   $view_config = "${bind::config::directory}/${view}.conf"
@@ -48,15 +51,17 @@ define bind::view ($view = $name, $ensure = 'present',
   # empty zones are at order 50
   bind::emptyzones {$view: ensure => $ensure, zones => $emptyzones, }
 
-  $zone_defaults = { view => $view }
+  $my_zone_defaults = { view => $view }
+  $all_zone_defaults = merge($zone_defaults, $my_zone_defaults)
+
   # real master zones are at order 55
-  define_resources('bind::zone::master', $master_zones, $zone_defaults)
+  define_resources('bind::zone::master', $master_zones, $my_zone_defaults)
 
   # slave zones are at order 60
-  define_resources('bind::zone::slave', $slave_zones, $zone_defaults)
+  define_resources('bind::zone::slave', $slave_zones, $my_zone_defaults)
 
   # weird miscellaneous zone types are at order 65
-  define_resources('bind::zone::other', $other_zones, $zone_defaults)
+  define_resources('bind::zone::other', $other_zones, $my_zone_defaults)
 
   concat::fragment {"${view_config}/trailer":
     target => $view_config,
