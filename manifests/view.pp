@@ -18,7 +18,7 @@ define bind::view ($view = $name, $ensure = 'present',
 		  ) {
   include bind::config
   $view_config = "${bind::config::directory}/${view}.conf"
-  $main_config = "${bind::config::directory}/named.conf"
+  $main_config = "${bind::config::main_config}"
   $root_hints  = $bind::config::root_hints
 
   concat { $view_config:
@@ -29,9 +29,9 @@ define bind::view ($view = $name, $ensure = 'present',
   }
 
   concat::fragment {"${view_config}/header":
-    target => $view_config,
-    order  => '00',
-    source => 'puppet:///modules/bind/view-header.conf.erb',
+    target  => $view_config,
+    order   => '00',
+    content => template('bind/view-header.conf.erb'),
   }
 
   concat::fragment {"${view_config}/disabled-empty-zones":
@@ -65,9 +65,9 @@ define bind::view ($view = $name, $ensure = 'present',
   define_resources('bind::zone::other', $other_zones, $my_zone_defaults)
 
   concat::fragment {"${view_config}/trailer":
-    target => $view_config,
-    order  => '99',
-    source => 'puppet:///modules/bind/view-trailer.conf.erb',
+    target  => $view_config,
+    order   => '99',
+    content => template('bind/view-trailer.conf.erb'),
   }
 
   # If ensure is anything other than "present", treat it as "absent".
