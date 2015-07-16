@@ -1,4 +1,7 @@
-define bind::zone::generic ($zone = $name, $view, $content, $order) {
+define bind::zone::generic ($zone = $name, $view, $order, $content,
+			    $zone_type, $zone_file,
+			    $notify_ = undef, $also_notify = undef,
+			    $allow_transfer = undef) {
   include bind::config
   $view_config = "${bind::config::directory}/${view}.conf"
 

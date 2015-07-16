@@ -1,0 +1,24 @@
+	zone "<%= @zone %>" {
+		type <%= @zone_type %>;
+		file "<%= @zone_file %>";
+<% unless @notify_.nil? -%>
+		notify <%= @notify_ ? "yes" : "no" %>;
+<% end -%>
+<% if @also_notify -%>
+		also-notify {
+<%   @also_notify.each do |dest| -%>
+			<%= dest %>;
+<%   end -%>
+		};
+<% end -%>
+<% if @allow_transfer.length > 0 -%>
+		allow-transfer {
+<%   @allow_transfer.each do |dest| -%>
+			<%= dest %>;
+<%   end -%>
+		}
+<% end -%>
+<% @content.each_line do |line| -%>
+	<%= line -%>
+<% end -%>
+	};

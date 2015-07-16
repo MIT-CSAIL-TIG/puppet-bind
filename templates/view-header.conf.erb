@@ -37,8 +37,8 @@ view "%<= @view %>" {
 <% unless @dnssec_lookaside.nil? -%>
 	dnssec-lookaside <%= bool_or_string(@dnssec_lookaside) %>;
 <% end -%>
-<% unless @notify.nil? -%>
-	notify <%= @notify ? "yes" : "no" %>;
+<% unless @notify_.nil? -%>
+	notify <%= @notify_ ? "yes" : "no" %>;
 <% end -%>
 <% if @also_notify -%>
 	also-notify {
