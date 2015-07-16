@@ -1,0 +1,11 @@
+	channel "<%= @channel %>" {
+<% if @facility -%>
+		facility <%= @facility %>;
+<% else -%>
+		file <%= @file %>;
+<% end -%>
+		severity <%= @severity %>;
+		print-category <%= @print_category ? "yes" : "no" %>;
+		print-severity <%= @print_severity ? "yes" : "no" %>;
+		print-time <%= @print_time ? "yes" : "no" %>;
+	};

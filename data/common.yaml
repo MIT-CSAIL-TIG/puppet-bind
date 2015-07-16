@@ -9,3 +9,80 @@ bind::package::install_documentation: true
 bind::tools::tools_conflict_with_server: false
 
 bind::config::install_root_hints: false
+
+#
+########################################################################
+# The following paths vary a lot between systems; they are listed here
+# for documentation purposes only (failure to define these to real
+# values will break manifest compilation).  N.B.: ~ is YAML syntax for
+# the distinguished "undefined" value.
+
+# The parent directory for all of of the configuration files (should
+# not be writable by the user named(8) runs as):
+bind::config::directory: ~
+
+# A directory where named(8) can write temporary files, update
+# journals, auto-maintained trust anchors, root hints, etc.  This is
+# also the directory where dump files will get written if not
+# otherwise specified:
+bind::config:working_dir: working
+
+# Name of a file where named(8) can write its process ID on startup.
+# Needs to be writable by the user named runs as, so it might not be
+# directly in /var/run.  Many times the parent directory of this file
+# is created automatically by startup scripts:
+bind::config::pid_file: ~
+
+# Name of the cache dump file that gets written when you do "rndc
+# dump":
+bind::config::dump_file: ~
+
+# Name of the file where statistics get written, if configured and
+# enabled:
+bind::config::statistics_file: ~
+
+#
+########################################################################
+# Defaults that should not need changing (and may in fact be
+# hard-coded elsewhere in this module).  Paths are relative to
+# bind::config::directory, above.
+
+# Directory where original master zone files are located (if using
+# inline-signing, must be writable by the user named(8) runs as due to
+# bugs in BIND):
+bind::config::master_dir: master
+
+# Directory where transferred copies of slave zone files are located
+# (writable by the user named(8) runs as):
+bind::config::slave_dir: slave
+
+# Directory where cryptographic keying material is located (must be
+# readable and searchable by the user named(8) runs as, and should not
+# be searchable by any non-administrative user):
+bind::config::keys_dir: keys
+
+#
+########################################################################
+# Logging configuration.  BIND's logs are configured first by
+# establishing "channels", which are named log destinations, and then
+# by mapping individual "categories" of log messages to one or more of
+# those channels.
+
+bind::config::log_channels:
+  main:
+    facility: daemon
+    severity: info
+  auth:
+    facility: auth
+    severity: info
+
+bind::config::log_categories:
+  unmatched: [ null ]
+  default: [ main ]
+  "lame-servers": [ null ]
+  update: [ null ]
+
+# True if you want named(8) to start up with query logging turned on.
+# You probably also want to configure a separate log channel for them.
+# This can be enabled at runtime using rndc(8).
+bind::config::log_queries_by_default: false
