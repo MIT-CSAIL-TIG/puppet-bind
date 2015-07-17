@@ -220,7 +220,7 @@ bind::config::empty:
 - "3.ip6.arpa"
 - "4.ip6.arpa"
 - "5.ip6.arpa"
-- "5.ip6.arpa"
+- "6.ip6.arpa"
 - "7.ip6.arpa"
 - "8.ip6.arpa"
 - "9.ip6.arpa"
