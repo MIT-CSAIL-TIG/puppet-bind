@@ -87,7 +87,7 @@ class bind::config ($ensure, $directory, $root_hints, $install_root_hints,
     content => "logging {\n",
   }
 
-  create_resources('bind::log::channel', $log_channels, $log_defaults)
+  create_resources('bind::log::channel', $log_channels, $channel_defaults)
   create_resources('bind::log::category', $log_categories, $category_defaults)
 
   concat::fragment {"${main_config}/logging-end":
