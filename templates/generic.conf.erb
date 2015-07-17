@@ -4,17 +4,17 @@
 <% unless @notify_.nil? -%>
 		notify <%= @notify_ ? "yes" : "no" %>;
 <% end -%>
-<% if @also_notify -%>
+<% unless @also_notify.nil? -%>
 		also-notify {
 <%   @also_notify.each do |dest| -%>
 			<%= dest %>;
 <%   end -%>
 		};
 <% end -%>
-<% if @allow_transfer.length > 0 -%>
+<% unless @allow_transfer.nil? -%>
 		allow-transfer {
-<%   @allow_transfer.each do |dest| -%>
-			<%= dest %>;
+<%   @allow_transfer.each do |ace| -%>
+			<%= ace %>;
 <%   end -%>
 		}
 <% end -%>
