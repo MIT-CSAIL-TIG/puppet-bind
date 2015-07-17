@@ -14,14 +14,16 @@ define bind::zone::empty ($zone = $name, $view = 'default', $db) {
   # Would need a separate defined resource to implement that!
   concat::fragment {"disable-empty-zone $name in $view":
     target  => $view_config,
-    order   => "45",
+    order   => "45",	# do these still need to be up front?
     content => "\tdisable-empty-zone \"${zone}\";\n",
   }
 
   bind::zone::generic {$name:
-    zone    => $zone,
-    view    => $view,
-    order   => "50",
-    content => template("bind/empty-zone.conf.erb"),
+    zone      => $zone,
+    view      => $view,
+    type      => master,
+    zone_file => $db,
+    order     => "90",	# push this clutter to the end
+    content   => '',	# no other configuration required
   }
 }

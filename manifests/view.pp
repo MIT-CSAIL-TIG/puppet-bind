@@ -49,11 +49,8 @@ define bind::view ($view = $name, $ensure = 'present',
     content => template('bind/root-hints.conf.erb'),
   }
   
-  # empty zones are at order 50
   $explicit_zones = union(union(keys($master_zones), keys($slave_zones)),
 			  keys($other_zones))
-  $emptyzones = delete($empty, $explicit_zones)
-  bind::emptyzones {$view: ensure => $ensure, zones => $emptyzones, }
 
   $my_zone_defaults = { view => $view }
   $all_zone_defaults = merge($zone_defaults, $my_zone_defaults)
@@ -66,6 +63,11 @@ define bind::view ($view = $name, $ensure = 'present',
 
   # weird miscellaneous zone types are at order 65
   create_resources('bind::zone::other', $other_zones, $my_zone_defaults)
+
+  # empty zones are at order 90, because they make a lot of visual
+  # clutter
+  $emptyzones = delete($empty, $explicit_zones)
+  bind::emptyzones {$view: ensure => $ensure, zones => $emptyzones, }
 
   concat::fragment {"${view_config}/trailer":
     target  => $view_config,
