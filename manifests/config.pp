@@ -21,7 +21,7 @@ class bind::config ($ensure, $directory, $root_hints, $install_root_hints,
 		    $pid_file = undef, # has compiled-in default
 		    $dump_file = undef, # has compiled-in default
 		    $statistics_file = undef, # has compiled-in default
-		    $main_config = "${directory}/named.conf",
+		    $named_conf,
 		    $views) {
 
   # named will resolve these automatically relative to its working directory.
@@ -33,6 +33,7 @@ class bind::config ($ensure, $directory, $root_hints, $install_root_hints,
   $master_path = "${directory}/${master_dir}"
   $slave_path  = "${directory}/${slave_dir}"
   $keys_path   = "${directory}/${keys_dir}"
+  $main_config = "${directory}/${named_conf}"
 
   # This often will be absolute, since Linux systems like to hide
   # the working directory off in /var somewhere.

@@ -21,6 +21,9 @@ bind::config::install_root_hints: false
 # not be writable by the user named(8) runs as):
 bind::config::directory: ~
 
+# The main configuration file:
+bind::config::named_conf: "named.conf"
+
 # A directory where named(8) can write temporary files, update
 # journals, auto-maintained trust anchors, root hints, etc.  This is
 # also the directory where dump files will get written if not
