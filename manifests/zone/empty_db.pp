@@ -1,6 +1,6 @@
 class bind::zone::empty_db ($ensure = 'present') {
   include bind::config
-  $db = "${bind::config::master}/empty.db"
+  $db = "${bind::config::master_path}/empty.db"
   file {$db:
     ensure => $ensure,
     owner  => root,
