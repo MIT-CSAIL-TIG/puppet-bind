@@ -11,7 +11,7 @@ def bool_or_string(val)
       val.to_s
   end
 end -%>
-view "%<= @view %>" {
+view "<%= @view %>" {
 <% unless @match_clients.nil? -%>
 	match-clients {
 <%   @match_clients.each do |ace| -%>

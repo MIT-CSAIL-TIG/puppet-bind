@@ -37,7 +37,7 @@ define bind::view ($view = $name, $ensure = 'present',
   concat::fragment {"${view_config}/disabled-empty-zones":
     target  => $view_config,
     order   => '44',
-    content => "\n// These zones are covered by the explicitly defined empty zones below.\n",
+    content => "\n\t// These zones are covered by the explicitly defined empty zones below.\n",
   }
   # disable-empty-zone configuration lines are at order 45
   # forwarders are at order 46
