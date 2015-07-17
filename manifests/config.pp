@@ -97,8 +97,9 @@ class bind::config ($ensure, $directory, $root_hints, $install_root_hints,
     content => "};\n",
   }
 
-  # include directives for the individual zone configurations get inserted
+  # include directives for the individual view configurations get inserted
   # here
+  create_resources('bind::view', $views, {})
 
   #concat::fragment {"${main_config}/trailer":
   #  target  => $main_config,
