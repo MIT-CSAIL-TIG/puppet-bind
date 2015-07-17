@@ -2,5 +2,5 @@
 
 options {
 	directory "<%= @working_path %>";
-	querylog "<%= @log_queries_by_default ? "yes" : "no" %>";
+	querylog <%= @log_queries_by_default ? "yes" : "no" %>;
 };
