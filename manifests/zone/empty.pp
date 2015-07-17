@@ -18,7 +18,9 @@ define bind::zone::empty ($zone = $name, $view = 'default', $db) {
     content => "\tdisable-empty-zone \"${zone}\";\n",
   }
 
-  bind::zone::generic {$zone:
+  bind::zone::generic {$name:
+    zone    => $zone,
+    view    => $view,
     order   => "50",
     content => template("bind/empty-zone.conf.erb"),
   }
