@@ -5,11 +5,16 @@ define bind::zone::generic ($zone = $name, $view, $order, $content,
   include bind::config
   $view_config = "${bind::config::directory}/${view}.conf"
 
-  if $content {
+  validate_string($view)
+  validate_string($order)
+  validate_string($zone_type)
+  validate_string($zone_file)
+
+  if is_string($content) {
     concat::fragment {"${view_config}/${zone}":
       target  => $view_config,
       order   => $order,
-      content => $content,
+      content => template('bind/generic.conf.erb'),
     }
   } else {
     fail("no content provided for $zone and nothing else is implemented")
