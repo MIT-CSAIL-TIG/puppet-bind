@@ -46,7 +46,7 @@ define bind::view ($view = $name, $ensure = 'present',
   concat::fragment {"${view_config}/root-hints":
     target  => $view_config,
     order   => '49',
-    content => template('bind/root-hint.conf.erb'),
+    content => template('bind/root-hints.conf.erb'),
   }
   
   # empty zones are at order 50
