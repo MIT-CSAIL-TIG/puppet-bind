@@ -21,7 +21,7 @@ define bind::zone::empty ($zone = $name, $view = 'default', $db) {
   bind::zone::generic {$name:
     zone      => $zone,
     view      => $view,
-    type      => master,
+    zone_type => master,
     zone_file => $db,
     order     => "90",	# push this clutter to the end
     content   => '',	# no other configuration required
