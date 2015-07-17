@@ -24,7 +24,7 @@ define bind::view ($view = $name, $ensure = 'present',
   concat { $view_config:
     ensure => $ensure,
     owner  => root,
-    group  => 0,
+    group  => '0',
     mode   => '0444',
   }
 

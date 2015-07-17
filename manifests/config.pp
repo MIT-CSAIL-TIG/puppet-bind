@@ -53,7 +53,7 @@ class bind::config ($ensure, $directory, $root_hints, $install_root_hints,
     file {$root_hints:
       ensure => $ensure,
       owner  => root,
-      group  => 0,
+      group  => '0',
       mode   => '0444',
       source => 'puppet:///modules/bind/root.hints',
     }
@@ -62,7 +62,7 @@ class bind::config ($ensure, $directory, $root_hints, $install_root_hints,
   concat { $main_config:
     ensure => $ensure,
     owner  => root,
-    group  => 0,
+    group  => '0',
     mode   => '0444',
   }
 
