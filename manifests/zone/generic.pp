@@ -8,14 +8,14 @@ define bind::zone::generic ($zone = $name, $view, $order, $content,
   validate_string($view)
   validate_string($order)
   validate_string($zone_type)
-  validate_string($zone_file)
-  if defined($notify_) {
+  validate_absolute_path($zone_file)
+  if $notify_ != undef {
     validate_bool($notify_)
   }
-  if defined($also_notify) {
+  if $also_notify != undef {
     validate_array($also_notify)
   }
-  if defined($allow_transfer) {
+  if $allow_transfer != undef {
     validate_array($allow_transfer)
   }
 
