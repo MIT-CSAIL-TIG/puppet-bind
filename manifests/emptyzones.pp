@@ -5,6 +5,11 @@ define bind::emptyzones ($view = $name, $ensure = 'present', $zones) {
 
   # Maybe elide this extra defined type and just construct directly
   # from fragments here?
-  ensure_resource('bind::zone::empty', $zones,
-		  {view => $view, db => $empty_db})
+  $zones.each |$zone| {
+    bind::zone::empty { "$view/$zone":
+      zone => $zone,
+      view => $view,
+      db => $empty_db,
+    }
+  }
 }
