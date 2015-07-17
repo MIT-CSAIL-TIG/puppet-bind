@@ -59,13 +59,13 @@ define bind::view ($view = $name, $ensure = 'present',
   $all_zone_defaults = merge($zone_defaults, $my_zone_defaults)
 
   # real master zones are at order 55
-  define_resources('bind::zone::master', $master_zones, $my_zone_defaults)
+  create_resources('bind::zone::master', $master_zones, $my_zone_defaults)
 
   # slave zones are at order 60
-  define_resources('bind::zone::slave', $slave_zones, $my_zone_defaults)
+  create_resources('bind::zone::slave', $slave_zones, $my_zone_defaults)
 
   # weird miscellaneous zone types are at order 65
-  define_resources('bind::zone::other', $other_zones, $my_zone_defaults)
+  create_resources('bind::zone::other', $other_zones, $my_zone_defaults)
 
   concat::fragment {"${view_config}/trailer":
     target  => $view_config,
