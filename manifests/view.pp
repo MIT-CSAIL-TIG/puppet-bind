@@ -50,6 +50,9 @@ define bind::view ($view = $name, $ensure = 'present',
   }
   
   # empty zones are at order 50
+  $explicit_zones = union(union(keys($master_zones), keys($slave_zones)),
+			  keys($other_zones))
+  $emptyzones = delete($empty, $explicit_zones)
   bind::emptyzones {$view: ensure => $ensure, zones => $emptyzones, }
 
   $my_zone_defaults = { view => $view }

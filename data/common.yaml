@@ -10,7 +10,7 @@ bind::tools::tools_conflict_with_server: false
 
 bind::config::install_root_hints: false
 
-#
+#
 ########################################################################
 # The following paths vary a lot between systems; they are listed here
 # for documentation purposes only (failure to define these to real
@@ -25,7 +25,7 @@ bind::config::directory: ~
 # journals, auto-maintained trust anchors, root hints, etc.  This is
 # also the directory where dump files will get written if not
 # otherwise specified:
-bind::config:working_dir: working
+bind::config::working_dir: working
 
 # Name of a file where named(8) can write its process ID on startup.
 # Needs to be writable by the user named runs as, so it might not be
@@ -41,7 +41,7 @@ bind::config::dump_file: ~
 # enabled:
 bind::config::statistics_file: ~
 
-#
+#
 ########################################################################
 # Defaults that should not need changing (and may in fact be
 # hard-coded elsewhere in this module).  Paths are relative to
@@ -61,7 +61,7 @@ bind::config::slave_dir: slave
 # be searchable by any non-administrative user):
 bind::config::keys_dir: keys
 
-#
+#
 ########################################################################
 # Logging configuration.  BIND's logs are configured first by
 # establishing "channels", which are named log destinations, and then
@@ -86,3 +86,170 @@ bind::config::log_categories:
 # You probably also want to configure a separate log channel for them.
 # This can be enabled at runtime using rndc(8).
 bind::config::log_queries_by_default: false
+
+#
+########################################################################
+# Empty zones configuration
+# There are a LOT of these.
+
+bind::config::empty:
+- "localhost"		# BCP 32
+- "127.in-addr.arpa"	# Loopback network: RFC 1912/5735/6303
+- "255.in-addr.arpa"	# Broadcast "network": RFC 1912/5735/6303
+- "0.ip6.arpa"		# IPv6 loopback network: RFC 6303
+- "0.in-addr.arpa"	# "This network": RFC 1912/5735/6303
+- "10.in-addr.arpa"	# RFC 1918 networks
+- "16.172.in-addr.arpa"
+- "17.172.in-addr.arpa"
+- "18.172.in-addr.arpa"
+- "19.172.in-addr.arpa"
+- "20.172.in-addr.arpa"
+- "21.172.in-addr.arpa"
+- "22.172.in-addr.arpa"
+- "23.172.in-addr.arpa"
+- "24.172.in-addr.arpa"
+- "25.172.in-addr.arpa"
+- "26.172.in-addr.arpa"
+- "27.172.in-addr.arpa"
+- "28.172.in-addr.arpa"
+- "29.172.in-addr.arpa"
+- "30.172.in-addr.arpa"
+- "31.172.in-addr.arpa"
+- "168.192.in-addr.arpa"
+- "64.100.in-addr.arpa"		# "Shared Address Space" RFC 6598
+- "65.100.in-addr.arpa"
+- "66.100.in-addr.arpa"
+- "67.100.in-addr.arpa"
+- "68.100.in-addr.arpa"
+- "69.100.in-addr.arpa"
+- "70.100.in-addr.arpa"
+- "71.100.in-addr.arpa"
+- "72.100.in-addr.arpa"
+- "73.100.in-addr.arpa"
+- "74.100.in-addr.arpa"
+- "75.100.in-addr.arpa"
+- "76.100.in-addr.arpa"
+- "77.100.in-addr.arpa"
+- "78.100.in-addr.arpa"
+- "79.100.in-addr.arpa"
+- "80.100.in-addr.arpa"
+- "81.100.in-addr.arpa"
+- "82.100.in-addr.arpa"
+- "83.100.in-addr.arpa"
+- "84.100.in-addr.arpa"
+- "85.100.in-addr.arpa"
+- "86.100.in-addr.arpa"
+- "87.100.in-addr.arpa"
+- "88.100.in-addr.arpa"
+- "89.100.in-addr.arpa"
+- "90.100.in-addr.arpa"
+- "91.100.in-addr.arpa"
+- "92.100.in-addr.arpa"
+- "93.100.in-addr.arpa"
+- "94.100.in-addr.arpa"
+- "95.100.in-addr.arpa"
+- "96.100.in-addr.arpa"
+- "97.100.in-addr.arpa"
+- "98.100.in-addr.arpa"
+- "99.100.in-addr.arpa"
+- "100.100.in-addr.arpa"
+- "101.100.in-addr.arpa"
+- "102.100.in-addr.arpa"
+- "103.100.in-addr.arpa"
+- "104.100.in-addr.arpa"
+- "105.100.in-addr.arpa"
+- "106.100.in-addr.arpa"
+- "107.100.in-addr.arpa"
+- "108.100.in-addr.arpa"
+- "109.100.in-addr.arpa"
+- "110.100.in-addr.arpa"
+- "111.100.in-addr.arpa"
+- "112.100.in-addr.arpa"
+- "113.100.in-addr.arpa"
+- "114.100.in-addr.arpa"
+- "115.100.in-addr.arpa"
+- "116.100.in-addr.arpa"
+- "117.100.in-addr.arpa"
+- "118.100.in-addr.arpa"
+- "119.100.in-addr.arpa"
+- "120.100.in-addr.arpa"
+- "121.100.in-addr.arpa"
+- "122.100.in-addr.arpa"
+- "123.100.in-addr.arpa"
+- "124.100.in-addr.arpa"
+- "125.100.in-addr.arpa"
+- "126.100.in-addr.arpa"
+- "127.100.in-addr.arpa"
+- "254.169.in-addr.arpa"	# Link-local addresses RFC 3927/5735/6303
+- "0.0.192.in-addr.arpa"	# Protocol assignments RFC 5735/5736
+- "2.0.192.in-addr.arpa"	# Reserved for documentation RFC 5735/5737/6303
+- "100.51.198.in-addr.arpa"
+- "113.0.203.in-addr.arpa"
+- "8.b.d.0.1.0.0.2.ip6.arpa"	# Reserved for documentation RFC 3849/6303
+- "test"			# Reserved for documentation BCP 32
+- "example"
+- "invalid"
+- "example.com"
+- "example.net"
+- "example.org"
+- "18.198.in-addr.arpa"		# Router benchmarking RFC 2544/5735
+- "19.198.in-addr.arpa"
+- "240.in-addr.arpa"		# Old "class E" addresses RFC 5735
+- "241.in-addr.arpa"
+- "242.in-addr.arpa"
+- "243.in-addr.arpa"
+- "244.in-addr.arpa"
+- "245.in-addr.arpa"
+- "246.in-addr.arpa"
+- "247.in-addr.arpa"
+- "248.in-addr.arpa"
+- "249.in-addr.arpa"
+- "250.in-addr.arpa"
+- "251.in-addr.arpa"
+- "252.in-addr.arpa"
+- "253.in-addr.arpa"
+- "254.in-addr.arpa"
+- "1.ip6.arpa"			# IPv6 unassigned addresses RFC 4291
+- "3.ip6.arpa"
+- "4.ip6.arpa"
+- "5.ip6.arpa"
+- "5.ip6.arpa"
+- "7.ip6.arpa"
+- "8.ip6.arpa"
+- "9.ip6.arpa"
+- "a.ip6.arpa"
+- "b.ip6.arpa"
+- "c.ip6.arpa"
+- "d.ip6.arpa"
+- "e.ip6.arpa"
+- "0.f.ip6.arpa"
+- "1.f.ip6.arpa"
+- "2.f.ip6.arpa"
+- "3.f.ip6.arpa"
+- "4.f.ip6.arpa"
+- "5.f.ip6.arpa"
+- "6.f.ip6.arpa"
+- "7.f.ip6.arpa"
+- "8.f.ip6.arpa"
+- "9.f.ip6.arpa"
+- "a.f.ip6.arpa"
+- "b.f.ip6.arpa"
+- "0.e.f.ip6.arpa"
+- "1.e.f.ip6.arpa"
+- "2.e.f.ip6.arpa"
+- "3.e.f.ip6.arpa"
+- "4.e.f.ip6.arpa"
+- "5.e.f.ip6.arpa"
+- "6.e.f.ip6.arpa"
+- "7.e.f.ip6.arpa"
+- "c.f.ip6.arpa"		# "IPv6 ULA" RFC 4193/6303
+- "d.f.ip6.arpa"
+- "8.e.f.ip6.arpa"		# IPv6 link-local addresses RFC 4291/6303
+- "9.e.f.ip6.arpa"
+- "a.e.f.ip6.arpa"
+- "b.e.f.ip6.arpa"
+- "c.e.f.ip6.arpa"		# Old IPv6 site-local addresses RFC 3879/6303
+- "d.e.f.ip6.arpa"
+- "e.e.f.ip6.arpa"
+- "f.e.f.ip6.arpa"
+- "ip6.int"			# Old IPv6 inverse mapping RFC 4159

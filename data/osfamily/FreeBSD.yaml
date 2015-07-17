@@ -2,6 +2,16 @@
 # Common pathnames
 bind::config::directory: "/usr/local/etc/namedb"
 bind::config::keys: "keys"
+bind::config::pid_file: "/var/run/named/pid"
+# Sample config in the bind910 package uses /var/dump/named_dump.db,
+# which is a really odd choice.  Use the compiled-in default for now,
+# which will be relative to the working directory (bind::config::working_dir).
+bind::config::dump_file: ~
+# Similarly, the sample config uses /var/stats/named.stats, which is
+# odd since there is no /var/stats directory and it might well not be
+# writable anyway.
+bind::config::statistics_file: ~
+
 bind::config::root_hints: "/usr/local/etc/namedb/named.root"
 
 bind::package::packages:
