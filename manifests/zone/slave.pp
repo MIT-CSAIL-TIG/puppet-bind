@@ -11,7 +11,9 @@ define bind::zone::slave ($zone = $name, $view, $file = undef,
     # N.B.: must be unique; BIND cannot share slave zone files between views.
     $zone_file = "${bind::config::directory}/slave/${view}-${zone}.db"
   }
-  bind::zone::generic {$zone:
+  bind::zone::generic {"$view/$zone":
+    zone           => $zone,
+    view           => $view,
     zone_type      => slave,
     zone_file      => $zone_file,
     allow_transfer => $allow_transfer,

@@ -6,7 +6,9 @@ define bind::zone::master ($zone = $name, $view, $source,
   include bind::config
   $key_directory = $bind::config::key_directory
 
-  bind::zone::generic {$zone:
+  bind::zone::generic {"$view/$zone":
+    zone           => $zone,
+    view           => $view,
     zone_type      => master,
     zone_file      => $source,
     allow_transfer => $allow_transfer,
