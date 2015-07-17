@@ -99,9 +99,9 @@ class bind::config ($ensure, $directory, $root_hints, $install_root_hints,
   # include directives for the individual zone configurations get inserted
   # here
 
-  concat::fragment {"${main_config}/trailer":
-    target  => $main_config,
-    order   => '99',
-    content => template('bind/main-trailer.conf.erb'),
-  }
+  #concat::fragment {"${main_config}/trailer":
+  #  target  => $main_config,
+  #  order   => '99',
+  #  content => template('bind/main-trailer.conf.erb'),
+  #}
 }
