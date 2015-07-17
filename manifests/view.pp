@@ -45,7 +45,7 @@ define bind::view ($view = $name, $ensure = 'present',
 
   concat::fragment {"${view_config}/root-hints":
     target  => $view_config,
-    order   => 49,
+    order   => '49',
     content => template('bind/root-hint.conf.erb'),
   }
   
