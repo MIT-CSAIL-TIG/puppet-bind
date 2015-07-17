@@ -2,8 +2,8 @@
 # specified, choose an appropriate (view-specific) file to store
 # the transferred zone data in.
 define bind::zone::slave ($zone = $name, $view, $file = undef,
-			  $masters, $allow_transfer, $notify_,
-			  $also_notify) {
+			  $masters, $allow_transfer = undef,
+			  $notify_ = undef, $also_notify = undef) {
   include bind::config
   if $file {
     $zone_file = $file

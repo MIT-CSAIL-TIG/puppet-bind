@@ -9,6 +9,15 @@ define bind::zone::generic ($zone = $name, $view, $order, $content,
   validate_string($order)
   validate_string($zone_type)
   validate_string($zone_file)
+  if defined($notify_) {
+    validate_bool($notify_)
+  }
+  if defined($also_notify) {
+    validate_array($also_notify)
+  }
+  if defined($allow_transfer) {
+    validate_array($allow_transfer)
+  }
 
   if is_string($content) {
     concat::fragment {"${view_config}/${zone}":
