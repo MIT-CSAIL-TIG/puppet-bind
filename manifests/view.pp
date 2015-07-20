@@ -87,7 +87,7 @@ define bind::view ($view = $name, $ensure = 'present',
     concat::fragment {"${main_config}/${view_config}":
       target  => $main_config,
       order   => '50',
-      content => "include \"${view}.conf\";\n",
+      content => "include \"${view_config}\";\n",
     }
   }
 }
