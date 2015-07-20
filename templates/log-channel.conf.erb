@@ -1,6 +1,6 @@
 	channel "<%= @channel %>" {
 <% if @facility -%>
-		facility <%= @facility %>;
+		syslog <%= @facility %>;
 <% else -%>
 		file <%= @file %>;
 <% end -%>
