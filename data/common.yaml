@@ -85,13 +85,13 @@ bind::config::log_channels:
 
 bind::config::log_categories:
   unmatched:
-    channels: [ null ]
+    channels: [ "null" ]
   default:
-    channels: [ main ]
+    channels: [ "main" ]
   "lame-servers":
-    channels: [ null ]
+    channels: [ "null" ]
   update:
-    channels: [ null ]
+    channels: [ "null" ]
 
 # True if you want named(8) to start up with query logging turned on.
 # You probably also want to configure a separate log channel for them.
