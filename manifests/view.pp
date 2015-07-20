@@ -27,6 +27,9 @@ define bind::view ($view = $name, $ensure = 'present',
     group  => '0',
     mode   => '0444',
   }
+  if $bind::config::checkconf {
+    Concat[$view_config] { validate_cmd => "${bind::config::checkconf} %", }
+  }
 
   concat::fragment {"${view_config}/header":
     target  => $view_config,

@@ -14,8 +14,12 @@ bind::config::install_root_hints: false
 ########################################################################
 # The following paths vary a lot between systems; they are listed here
 # for documentation purposes only (failure to define these to real
-# values will break manifest compilation).  N.B.: ~ is YAML syntax for
+# values may break manifest compilation).  N.B.: ~ is YAML syntax for
 # the distinguished "undefined" value.
+
+# The full path to the named-checkconf binary, used for validating
+# configuration files; if not defined, no validation will be done.
+bind::config::checkconf: ~
 
 # The parent directory for all of of the configuration files (should
 # not be writable by the user named(8) runs as):

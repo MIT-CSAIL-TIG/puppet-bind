@@ -21,6 +21,7 @@ class bind::config ($ensure, $directory, $root_hints, $install_root_hints,
 		    $pid_file = undef, # has compiled-in default
 		    $dump_file = undef, # has compiled-in default
 		    $statistics_file = undef, # has compiled-in default
+		    $checkconf = undef, # skip validation if not defined
 		    $named_conf,
 		    $views) {
 
@@ -65,6 +66,9 @@ class bind::config ($ensure, $directory, $root_hints, $install_root_hints,
     owner  => root,
     group  => '0',
     mode   => '0444',
+  }
+  if $checkconf {
+    Concat[$main_config] { validate_cmd => "$checkconf %", }
   }
 
   concat::fragment {"${main_config}/header":
