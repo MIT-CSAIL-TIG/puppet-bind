@@ -18,12 +18,20 @@
 class bind::config ($ensure, $directory, $root_hints, $install_root_hints,
 		    $log_queries_by_default, $log_channels, $log_categories,
 		    $master_dir, $slave_dir, $keys_dir, $working_dir,
+		    $tsig_keys, $remote_servers,
 		    $pid_file = undef, # has compiled-in default
 		    $dump_file = undef, # has compiled-in default
 		    $statistics_file = undef, # has compiled-in default
 		    $checkconf = undef, # skip validation if not defined
 		    $named_conf,
 		    $views) {
+
+  validate_hash($log_channels, $log_categories, $tsig_keys, $remote_severs)
+  validate_hash($views)
+  validate_absolute_path($directory)
+  validate_bool($install_root_hints, $log_queries_by_default)
+  validate_string($root_hints, $master_dir, $slave_dir, $keys_dir)
+  validate_sting($working_dir, $named_conf)
 
   # named will resolve these automatically relative to its working directory.
   # We want them relative to the configuration directory, and we potentially
@@ -100,6 +108,10 @@ class bind::config ($ensure, $directory, $root_hints, $install_root_hints,
     order   => '12',
     content => "};\n",
   }
+
+  # Define keys and servers for transaction signature (TSIG) security
+  create_resources('bind::tsig', $tsig_keys, {})
+  create_resources('bind::server', $remote_servers, {})
 
   # include directives for the individual view configurations get inserted
   # here

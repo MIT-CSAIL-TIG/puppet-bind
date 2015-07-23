@@ -1,0 +1,13 @@
+server <%= @address %> {
+<% if @keys.length > 0 -%>
+	keys {
+<%   @keys.each do |key| -%>
+		"%<= key %>";
+<%   end -%>
+	};
+<% end -%>
+<% unless @extra.nil? -%>
+<%   @extra.each_line do |line| -%>
+	<%= line -%>
+<%   end -%>
+<% end -%>

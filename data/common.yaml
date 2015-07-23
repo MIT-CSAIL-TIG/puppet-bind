@@ -100,6 +100,36 @@ bind::config::log_queries_by_default: false
 
 #
 ########################################################################
+# TSIG authentication
+# This has two pieces: defining the keys themselves, which is done
+# with bind::config::tsig_keys, and associating the keys with individual
+# remote servers, which is controlled by bind::config::remote_servers.
+
+bind::config::tsig_keys: {}
+
+# Example:
+# bind::config::tsig_keys:
+#   server1-server2.example.com:
+#     algorithm: hmac-sha256
+#     secret: "sv6KW+A3ic8FsZjaEFSih/xGHvip9smM86xraEECmnw="
+#   server3.example.net:
+#     algorithm: hmac-sha384
+#     secret: "Y6hB+fRwlSEtuxbg0vQ33QpvxsXPGADGIqomcW2MrVzfRXBgwjigmm9tS47ed/BN"
+
+bind::config::remote_servers: {}
+
+# Example:
+# bind::config::remote_servers:
+#   "192.0.2.27":
+#     keys: [ "server3.example.net" ]
+#     extra: |
+#       // Additional configuration will be inserted directly into
+#       // server statement
+#   "2001:0bd8::1122:33fe:ff44:5566":
+#     keys: [ "server1-server2.example.com", "server3.example.net" ]
+
+#
+########################################################################
 # Empty zones configuration
 # There are a LOT of these.
 
