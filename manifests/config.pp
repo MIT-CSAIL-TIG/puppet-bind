@@ -26,12 +26,24 @@ class bind::config ($ensure, $directory, $root_hints, $install_root_hints,
 		    $named_conf,
 		    $views) {
 
-  validate_hash($log_channels, $log_categories, $tsig_keys, $remote_severs)
+  # Validate data types first.  These are all on separate lines because
+  # the error message only gives a line number, not the actual variable
+  # that had the incorrect type of value, so that's is the only way to
+  # identify where the problem is.
+  validate_hash($log_channels)
+  validate_hash($log_categories)
+  validate_hash($tsig_keys)
+  validate_hash($remote_servers)
   validate_hash($views)
   validate_absolute_path($directory)
-  validate_bool($install_root_hints, $log_queries_by_default)
-  validate_string($root_hints, $master_dir, $slave_dir, $keys_dir)
-  validate_sting($working_dir, $named_conf)
+  validate_bool($install_root_hints)
+  validate_bool($log_queries_by_default)
+  validate_string($root_hints)
+  validate_string($master_dir)
+  validate_string($slave_dir)
+  validate_string($keys_dir)
+  validate_sting($working_dir)
+  validate_string($named_conf)
 
   # named will resolve these automatically relative to its working directory.
   # We want them relative to the configuration directory, and we potentially
@@ -76,7 +88,7 @@ class bind::config ($ensure, $directory, $root_hints, $install_root_hints,
     mode   => '0444',
   }
   if $checkconf {
-    Concat[$main_config] { validate_cmd => "$checkconf %", }
+    Concat[$main_config] { validate_cmd => "${checkconf} %", }
   }
 
   concat::fragment {"${main_config}/header":
@@ -85,7 +97,7 @@ class bind::config ($ensure, $directory, $root_hints, $install_root_hints,
     content => template('bind/main-header.conf.erb'),
   }
 
-  $channel_defaults = { 
+  $channel_defaults = {
     print_category => true,
     print_severity => false,
     print_time     => false,
