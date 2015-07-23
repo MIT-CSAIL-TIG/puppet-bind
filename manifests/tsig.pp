@@ -28,16 +28,16 @@
 # The "name" of the resource MUST be the actual "name" of the key to be
 # configured.
 #
-define bind::tsig ($ensure = 'present', $secret, $algorithm) {
+define bind::tsig ($secret, $algorithm, $ensure = 'present') {
   validate_string($secret, $algorithm)
 
   include bind::config
   $keys_path = $bind::config::keys_path
   $tsig_keys = "${keys_path}/tsig.keys"
 
-  require bind::tsig_keys
+  include bind::tsig_keys
   concat::fragment { "${tsig_keys}/${name}":
-    target  => "${tsig_keys}",
+    target  => $tsig_keys,
     order   => '10',
     content => template('bind/tsig_key.conf.erb'),
   }
