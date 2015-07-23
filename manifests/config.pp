@@ -18,6 +18,7 @@
 class bind::config ($ensure, $directory, $root_hints, $install_root_hints,
 		    $log_queries_by_default, $log_channels, $log_categories,
 		    $master_dir, $slave_dir, $keys_dir, $working_dir,
+		    $bind_user, $bind_group, $bind_owns_work_directories,
 		    $tsig_keys, $remote_servers,
 		    $pid_file = undef, # has compiled-in default
 		    $dump_file = undef, # has compiled-in default
@@ -38,11 +39,14 @@ class bind::config ($ensure, $directory, $root_hints, $install_root_hints,
   validate_absolute_path($directory)
   validate_bool($install_root_hints)
   validate_bool($log_queries_by_default)
+  validate_bool($bind_owns_work_directories)
   validate_string($root_hints)
   validate_string($master_dir)
   validate_string($slave_dir)
   validate_string($keys_dir)
   validate_string($working_dir)
+  validate_string($bind_user)
+  validate_string($bind_group)
   validate_string($named_conf)
 
   # named will resolve these automatically relative to its working directory.
@@ -62,6 +66,32 @@ class bind::config ($ensure, $directory, $root_hints, $install_root_hints,
     $working_path = $working_dir
   } else {
     $working_path = "${directory}/working"
+  }
+
+  # Make sure that the relevant directories all exist (they might not
+  # be created by the package in some cases).
+  case $ensure {
+    'present', 'latest': { $dir_ensure = 'directory' }
+    default: { $dir_ensure = 'absent' }
+  }
+  file { [$master_path, $keys_path]:
+    ensure => $dir_ensure,
+    owner  => root,
+    group  => '0',
+    mode   => '0755',
+  }
+  file { [$working_path, $slave_path]:
+    ensure => $dir_ensure,
+    group  => $bind_group,
+    purge  => $ensure == 'purged',
+    force  => $ensure == 'purged',
+  }
+  if $bind_owns_work_directories {
+    File[$slave_path] { owner => $bind_user, mode  => '0755', }
+    File[$working_path] { owner => $bind_user, mode  => '0755', }
+  } else {
+    File[$slave_path] { owner => root, mode  => '0775', }
+    File[$working_path] { owner => root, mode  => '0775', }
   }
 
   # Normally assume that the BIND package will include an up-to-date

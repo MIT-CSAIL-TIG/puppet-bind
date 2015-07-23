@@ -12,8 +12,9 @@ bind::config::dump_file: ~
 # odd since there is no /var/stats directory and it might well not be
 # writable anyway.
 bind::config::statistics_file: ~
-
 bind::config::root_hints: "/usr/local/etc/namedb/named.root"
+
+bind::config::bind_owns_work_directories: true
 
 bind::package::packages:
 - bind910

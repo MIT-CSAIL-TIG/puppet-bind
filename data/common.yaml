@@ -50,6 +50,19 @@ bind::config::statistics_file: ~
 
 #
 ########################################################################
+# Users, groups, permissions, and other security settings
+
+# Does the BIND user own the working directories, or does it rely
+# on group permissions for write access?  (This varies between OSes.)
+bind::config::bind_owns_work_directories: ~
+
+# What name is used for the user and group bind normally runs under?
+# (Thankfully this is the same on most operating systems!)
+bind::config::bind_user: bind
+bind::config::bind_group: bind
+
+#
+########################################################################
 # Defaults that should not need changing (and may in fact be
 # hard-coded elsewhere in this module).  Paths are relative to
 # bind::config::directory, above.

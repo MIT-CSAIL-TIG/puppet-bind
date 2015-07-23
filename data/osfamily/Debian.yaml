@@ -3,4 +3,5 @@ bind::tools::packages:
 - bind9-host
 - dnsutils
 
-bind::config::root_hints: "/etc/bind/db.root"
+bind::config::bind_owns_work_directories: false
+bind::config::root_hints: "/etc/bind/db.empty"
