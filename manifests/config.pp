@@ -42,7 +42,7 @@ class bind::config ($ensure, $directory, $root_hints, $install_root_hints,
   validate_string($master_dir)
   validate_string($slave_dir)
   validate_string($keys_dir)
-  validate_sting($working_dir)
+  validate_string($working_dir)
   validate_string($named_conf)
 
   # named will resolve these automatically relative to its working directory.
