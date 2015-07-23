@@ -32,10 +32,9 @@ define bind::tsig ($secret, $algorithm, $ensure = 'present') {
   validate_string($secret, $algorithm)
 
   include bind::config
-  $keys_path = $bind::config::keys_path
-  $tsig_keys = "${keys_path}/tsig.keys"
-
   include bind::tsig_keys
+  $tsig_keys = $bind::tsig_keys::tsig_keys
+
   concat::fragment { "${tsig_keys}/${name}":
     target  => $tsig_keys,
     order   => '10',
