@@ -2,7 +2,7 @@ server <%= @address %> {
 <% if @keys.length > 0 -%>
 	keys {
 <%   @keys.each do |key| -%>
-		"%<= key %>";
+		"<%= key %>";
 <%   end -%>
 	};
 <% end -%>
