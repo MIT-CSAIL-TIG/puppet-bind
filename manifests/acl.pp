@@ -14,7 +14,7 @@ define bind::acl ($acl = $name, $keys = [], $addresses = []) {
   include bind::config
   $main_config = $bind::config::main_config
 
-  concat::fragment {"${main_config}/acl":
+  concat::fragment {"${main_config}/acl-${acl}":
     target  => $main_config,
     order   => '25',
     content => template('bind/acl.conf.erb'),
