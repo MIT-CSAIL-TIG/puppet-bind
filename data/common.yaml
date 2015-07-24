@@ -143,6 +143,24 @@ bind::config::remote_servers: {}
 
 #
 ########################################################################
+# Access control lists
+# Technically we could put everything under "addresses" but then
+# users would have to remember that keys have a different syntax.
+# Take care of that for them.  Everything under "addresses" gets
+# included as literal text so there's an escape hatch already.
+#
+bind::config::acls: {}
+
+# Example:
+# bind::config::acls:
+#   axfr:
+#     keys:
+#     - "mykeyname.mydomain.example"
+#     addresses:
+#     - "192.0.2.42"
+
+#
+########################################################################
 # Empty zones configuration
 # There are a LOT of these.
 

@@ -1,0 +1,9 @@
+acl <%= @acl %> {
+<% @keys.each do |key| -%>
+	key <%= key %>;
+<% end -%>
+<% @addresses.each do |addr| -%>
+	<%= addr %>;
+<% end -%>
+};
+
