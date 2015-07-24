@@ -11,9 +11,9 @@ define bind::trust_anchor ($domain = $name, $keys) {
   $main_config = $bind::config::main_config
 
   ensure_resource('concat::fragment', "${main_config}/anchor-begin",
-    { target => $main_config, order => '29', content => 'trusted-keys {', })
+    { target => $main_config, order => '29', content => "trusted-keys {\n", })
   ensure_resource('concat::fragment', "${main_config}/anchor-end",
-    { target => $main_config, order => '31', content => '};', })
+    { target => $main_config, order => '31', content => "};\n", })
 
   concat::fragment { "${main_config}/anchor-${domain}":
     target  => $main_config,
