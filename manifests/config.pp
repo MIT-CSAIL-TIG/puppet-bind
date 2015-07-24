@@ -19,7 +19,7 @@ class bind::config ($ensure, $directory, $root_hints, $install_root_hints,
 		    $log_queries_by_default, $log_channels, $log_categories,
 		    $master_dir, $slave_dir, $keys_dir, $working_dir,
 		    $bind_user, $bind_group, $bind_owns_work_directories,
-		    $tsig_keys, $remote_servers, $acls,
+		    $tsig_keys, $remote_servers, $acls, $options,
 		    $pid_file = undef, # has compiled-in default
 		    $dump_file = undef, # has compiled-in default
 		    $statistics_file = undef, # has compiled-in default
@@ -35,8 +35,9 @@ class bind::config ($ensure, $directory, $root_hints, $install_root_hints,
   validate_hash($acls)
   validate_hash($log_channels)
   validate_hash($log_categories)
-  validate_hash($tsig_keys)
+  validate_hash($options)
   validate_hash($remote_servers)
+  validate_hash($tsig_keys)
   validate_hash($views)
   validate_absolute_path($directory)
   if $pid_file != undef {

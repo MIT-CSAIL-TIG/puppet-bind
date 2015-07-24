@@ -12,6 +12,21 @@ bind::config::install_root_hints: false
 
 #
 ########################################################################
+# Generic server options
+# These overlap a lot with view options.  Generally any option that
+# is allowed in an "options" section may be put here, but must be in
+# canonical named.conf format (so booleans are "yes" and "no", not YAML
+# true and false).  The more common options are supported directly by
+# parameters of the bind::config class.
+bind::config::options: {}
+
+# Example:
+# bind::config::options:
+#   "recursive-clients": "10000"
+#   "additional-from-cache": "no"
+
+#
+########################################################################
 # The following paths vary a lot between systems; they are listed here
 # for documentation purposes only (failure to define these to real
 # values may break manifest compilation).  N.B.: ~ is YAML syntax for
