@@ -38,6 +38,18 @@ class bind::config ($ensure, $directory, $root_hints, $install_root_hints,
   validate_hash($remote_servers)
   validate_hash($views)
   validate_absolute_path($directory)
+  if $pid_file != undef {
+    validate_absolute_path($pid_file)
+  }
+  if $checkconf != undef {
+    validate_absolute_path($checkconf)
+  }
+  if $dump_file != undef {
+    validate_string($dump_file) # may be relative to $working_dir
+  }
+  if $statistics_file != undef {
+    validate_string($statistics_file) # ditto
+  }
   validate_bool($install_root_hints)
   validate_bool($log_queries_by_default)
   validate_bool($bind_owns_work_directories)
