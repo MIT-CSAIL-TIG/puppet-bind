@@ -27,6 +27,27 @@ bind::config::options: {}
 
 #
 ########################################################################
+# Trust anchors
+# Typically you should not have to configure this, but if your DNSsec
+# trust chain is broken in some way, having explicit trust anchors
+# will allow you to continue to validate your own zones (which may
+# be a good thing or it may be a bad thing depending on how and why
+# your trust chain is broken).  We need this because our parent zone
+# is not signed.
+bind::config::trusted_keys: {}
+
+# Example:
+# bind::config::trusted_keys:
+#   example.com:
+#     keys:
+#     - { key: "reallylongbase64", flags: 257, protocol: 3, algorithm: 5 }
+#     - { key: "anotherlongstring", algorithm: 5 }
+#
+# Since flags will nearly always be 257 and protocol will nearly always be
+# 3, these are the defaults.
+
+#
+########################################################################
 # The following paths vary a lot between systems; they are listed here
 # for documentation purposes only (failure to define these to real
 # values may break manifest compilation).  N.B.: ~ is YAML syntax for

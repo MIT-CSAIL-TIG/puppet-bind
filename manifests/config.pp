@@ -20,6 +20,7 @@ class bind::config ($ensure, $directory, $root_hints, $install_root_hints,
 		    $master_dir, $slave_dir, $keys_dir, $working_dir,
 		    $bind_user, $bind_group, $bind_owns_work_directories,
 		    $tsig_keys, $remote_servers, $acls, $options,
+		    $trusted_keys,
 		    $pid_file = undef, # has compiled-in default
 		    $dump_file = undef, # has compiled-in default
 		    $statistics_file = undef, # has compiled-in default
@@ -36,6 +37,7 @@ class bind::config ($ensure, $directory, $root_hints, $install_root_hints,
   validate_hash($log_channels)
   validate_hash($log_categories)
   validate_hash($options)
+  validate_hash($trusted_keys)
   validate_hash($remote_servers)
   validate_hash($tsig_keys)
   validate_hash($views)
@@ -206,6 +208,8 @@ class bind::config ($ensure, $directory, $root_hints, $install_root_hints,
   }
 
   create_resources('bind::acl', $acls, {})
+
+  create_resources('bind::trust_anchor', $trusted_keys, {})
 
   # include directives for the individual view configurations get inserted
   # here
