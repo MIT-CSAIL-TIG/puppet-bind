@@ -1,3 +1,9 @@
+#
+# Instantiate a view.  This module does not (yet) support defining zones
+# outside of views, so all of the important zone configuration is driven
+# from here.  (You can define zones explicitly in Puppet DSL but they must
+# reference a specific view name.)
+#
 define bind::view ($view = $name, $ensure = 'present',
 		   $empty = hiera('bind::config::empty'),
 		   $master_zones = {},
@@ -18,7 +24,7 @@ define bind::view ($view = $name, $ensure = 'present',
 		  ) {
   include bind::config
   $view_config = "${bind::config::directory}/${view}.conf"
-  $main_config = "${bind::config::main_config}"
+  $main_config = $bind::config::main_config
   $root_hints  = $bind::config::root_hints
 
   concat { $view_config:
@@ -85,6 +91,7 @@ define bind::view ($view = $name, $ensure = 'present',
       target  => $main_config,
       order   => '50',
       content => "include \"${view_config}\";\n",
+      require => Concat[$view_config],
     }
   }
 }
