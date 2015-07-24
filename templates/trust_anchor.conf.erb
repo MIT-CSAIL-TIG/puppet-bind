@@ -1,3 +1,3 @@
 <% @keys.each do |key| -%>
-	<%= @domain %> <%= key['flags'] || '257' %> <%= key['protocol'] || '3' %> <%= key['algorithm'] %> <%= key['key'] %>;
+	<%= @domain %> <%= key['flags'] || '257' %> <%= key['protocol'] || '3' %> <%= key['algorithm'] %> "<%= key['key'] %>";
 <% end -%>
