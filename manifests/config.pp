@@ -24,6 +24,7 @@ class bind::config ($ensure, $directory, $root_hints, $install_root_hints,
 		    $dump_file = undef, # has compiled-in default
 		    $statistics_file = undef, # has compiled-in default
 		    $checkconf = undef, # skip validation if not defined
+		    $extra = undef, # don't need any extras
 		    $named_conf,
 		    $views) {
 
@@ -48,6 +49,9 @@ class bind::config ($ensure, $directory, $root_hints, $install_root_hints,
   validate_string($bind_user)
   validate_string($bind_group)
   validate_string($named_conf)
+  if $extra != undef {
+    validate_string($extra)
+  }
 
   # named will resolve these automatically relative to its working directory.
   # We want them relative to the configuration directory, and we potentially
@@ -154,6 +158,18 @@ class bind::config ($ensure, $directory, $root_hints, $install_root_hints,
   # Define keys and servers for transaction signature (TSIG) security
   create_resources('bind::tsig', $tsig_keys, {})
   create_resources('bind::server', $remote_servers, {})
+
+  # Any literal configuration goes here.  We use this for things like
+  # response-rate limiting, which many sites won't need and has too many
+  # individual configuration options to represent directly in the parameters
+  # to this class.
+  if $extra != undef {
+    concat::fragment {"${main_config}/extra":
+      target  => $main_config,
+      order   => '20',
+      content => $extra,
+    }
+  }
 
   # include directives for the individual view configurations get inserted
   # here
