@@ -184,6 +184,26 @@ class bind::config ($ensure, $directory, $root_hints, $install_root_hints,
     }
   }
 
+  # Automatically instantiate some default ACLs for convenience
+  $management_stations = hiera_array('management_stations', [])
+  if size($management_stations) > 0 {
+    bind::acl {'management_stations': addresses => $management_stations, }
+  }
+  $local_netblocks = hiera_array('local_netblocks', [])
+  $local_netblocks_v6 = hiera_array('local_netblocks_v6', [])
+  if size($local_netblocks) + size($local_netblocks_v6) > 0 {
+    bind::acl {'local_netblocks':
+      addresses => union($local_netblocks, $local_netblocks_v6),
+    }
+  }
+  $campus_netblocks = hiera_array('campus_netblocks', [])
+  $campus_netblocks_v6 = hiera_array('campus_netblocks_v6', [])
+  if size($campus_netblocks) + size($campus_netblocks_v6) > 0 {
+    bind::acl {'campus_netblocks':
+      addresses => union($campus_netblocks, $campus_netblocks_v6),
+    }
+  }
+
   create_resources('bind::acl', $acls, {})
 
   # include directives for the individual view configurations get inserted
