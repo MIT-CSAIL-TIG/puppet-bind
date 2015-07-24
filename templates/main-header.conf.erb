@@ -2,13 +2,13 @@
 
 options {
 	directory "<%= @working_path %>";
-<% unless @pid_file.nil? %>
+<% unless @pid_file.nil? -%>
 	pid-file "<%= @pid_file %>";
 <% end -%>
-<% unless @statistics_file.nil? %>
+<% unless @statistics_file.nil? -%>
 	statistics-file "<%= @statistics_file %>";
 <% end -%>
-<% unless @dump_file.nil? %>
+<% unless @dump_file.nil? -%>
 	dump-file "<%= @dump_file %>";
 <% end -%>
 	querylog <%= @log_queries_by_default ? "yes" : "no" %>;
