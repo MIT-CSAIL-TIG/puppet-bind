@@ -84,6 +84,9 @@ bind::config::dump_file: ~
 # enabled:
 bind::config::statistics_file: ~
 
+# Full path name of the rndc(8) executable:
+bind::config::rndc_command: ~
+
 #
 ########################################################################
 # Users, groups, permissions, and other security settings

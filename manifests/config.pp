@@ -26,7 +26,7 @@ class bind::config ($ensure, $directory, $root_hints, $install_root_hints,
 		    $statistics_file = undef, # has compiled-in default
 		    $checkconf = undef, # skip validation if not defined
 		    $extra = undef, # don't need any extras
-		    $named_conf,
+		    $named_conf, $rndc_command,
 		    $views) {
 
   # Validate data types first.  These are all on separate lines because
@@ -65,6 +65,7 @@ class bind::config ($ensure, $directory, $root_hints, $install_root_hints,
   validate_string($bind_user)
   validate_string($bind_group)
   validate_string($named_conf)
+  validate_string($rndc_command)
   if $extra != undef {
     validate_string($extra)
   }
@@ -136,6 +137,7 @@ class bind::config ($ensure, $directory, $root_hints, $install_root_hints,
     owner  => root,
     group  => '0',
     mode   => '0444',
+    notify => Service['named'],
   }
   if $checkconf {
     Concat[$main_config] { validate_cmd => "${checkconf} %", }

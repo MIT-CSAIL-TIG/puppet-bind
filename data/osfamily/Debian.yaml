@@ -5,3 +5,5 @@ bind::tools::packages:
 
 bind::config::bind_owns_work_directories: false
 bind::config::root_hints: "/etc/bind/db.empty"
+bind::config::rndc_command: "/usr/sbin/rndc"
+bind::service::service_name: "bind"

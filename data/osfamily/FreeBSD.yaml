@@ -15,12 +15,13 @@ bind::config::statistics_file: ~
 bind::config::root_hints: "/usr/local/etc/namedb/named.root"
 
 bind::config::bind_owns_work_directories: true
+bind::config::rndc_command: "/usr/local/sbin/rndc"
 
 bind::package::packages:
 - bind910
 bind::package::version: "9.10"
 
-bind::service::name: named
+bind::service::service_name: named
 
 bind::tools::packages:
 - bind-tools

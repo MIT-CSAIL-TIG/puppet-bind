@@ -32,6 +32,7 @@ define bind::view ($view = $name, $ensure = 'present',
     owner  => root,
     group  => '0',
     mode   => '0444',
+    notify => Service['named'],
   }
 
   concat::fragment {"${view_config}/header":
