@@ -16,6 +16,7 @@ bind::config::root_hints: /etc/bind/db.root
 # and not the "working" directory, /var/cache/bind, which would
 # be the default.
 bind::config::master_dir: /etc/bind/master
+bind::config::slave_dir: /var/cache/bind
 bind::config::keys_dir: /etc/bind/keys
 
 bind::service::service_name: "bind9"
