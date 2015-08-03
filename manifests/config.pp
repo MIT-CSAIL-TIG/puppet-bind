@@ -75,10 +75,24 @@ class bind::config ($ensure, $directory, $root_hints, $install_root_hints,
   # want to be able to reference them in Puppet file resources, which need
   # an absolute path.
 
-  # Assume for now that these will never be absolute.
-  $master_path = "${directory}/${master_dir}"
-  $slave_path  = "${directory}/${slave_dir}"
-  $keys_path   = "${directory}/${keys_dir}"
+  if $master_dir =~ /^\// {
+    $master_path = $master_dir
+  } else {
+    $master_path = "${directory}/${master_dir}"
+  }
+  if $slave_dir =~ /^\// {
+    $slave_path = $slave_dir
+  } else {
+    $slave_path  = "${directory}/${slave_dir}"
+  }
+  if $keys_dir =~ /^\// {
+    $keys_path = $keys_dir
+  } else {
+    $keys_path   = "${directory}/${keys_dir}"
+  }
+
+  # Assume if nothing else that the config file itself will be in the
+  # normal place.
   $main_config = "${directory}/${named_conf}"
 
   # This often will be absolute, since Linux systems like to hide

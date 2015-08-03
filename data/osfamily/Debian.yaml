@@ -18,5 +18,5 @@ bind::config::root_hints: /etc/bind/db.root
 bind::config::master_dir: /etc/bind/master
 bind::config::keys_dir: /etc/bind/keys
 
-bind::service::service_name: "bind"
+bind::service::service_name: "bind9"
 
