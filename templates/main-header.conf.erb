@@ -12,7 +12,7 @@ options {
 	dump-file "<%= @dump_file %>";
 <% end -%>
 	querylog <%= @log_queries_by_default ? "yes" : "no" %>;
-<% @options.each do |k,v| -%>
-	<%= k %> <%= v %>;
+<% @options.keys.sort.each do |k| -%>
+	<%= k %> <%= @options[k] %>;
 <% end -%>
 };
