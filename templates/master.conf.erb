@@ -1,5 +1,5 @@
 <% if @inline_signing -%>
-key-directory "<%= @key_directory %>";
-auto-dnssec maintain;
-inline-signing yes;
+	key-directory "<%= @key_directory %>";
+	auto-dnssec maintain;
+	inline-signing yes;
 <% end -%>
