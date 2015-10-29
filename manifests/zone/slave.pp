@@ -3,8 +3,10 @@
 # the transferred zone data in.
 define bind::zone::slave ($zone = $name, $view, $file = undef,
 			  $masters, $allow_transfer = undef,
-			  $notify_ = undef, $also_notify = undef) {
+			  $inline_signing = false, $notify_ = undef,
+			  $also_notify = undef) {
   include bind::config
+  $key_directory = $bind::config::keys_path
   if $file {
     $zone_file = $file
   } else {
