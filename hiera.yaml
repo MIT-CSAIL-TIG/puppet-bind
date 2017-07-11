@@ -1,0 +1,15 @@
+---
+version: 4
+datadir: data
+hierarchy:
+  - name: "LSB Distribution"
+    backend: yaml
+    path: "lsbdistcodename/%{::lsbdistcodename}"
+
+  - name: "OS family"
+    backend: yaml
+    path: "osfamily/%{::osfamily}"
+
+  - name: "common"
+    backend: yaml
+
