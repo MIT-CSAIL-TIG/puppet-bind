@@ -204,12 +204,12 @@ bind::config::acls: {}
 # There are a LOT of these.
 
 bind::config::empty:
-- "localhost"		# BCP 32
-- "127.in-addr.arpa"	# Loopback network: RFC 1912/5735/6303
-- "255.in-addr.arpa"	# Broadcast "network": RFC 1912/5735/6303
-- "0.ip6.arpa"		# IPv6 loopback network: RFC 6303
-- "0.in-addr.arpa"	# "This network": RFC 1912/5735/6303
-- "10.in-addr.arpa"	# RFC 1918 networks
+- "localhost"           # BCP 32
+- "127.in-addr.arpa"    # Loopback network: RFC 1912/5735/6303
+- "255.in-addr.arpa"    # Broadcast "network": RFC 1912/5735/6303
+- "0.ip6.arpa"          # IPv6 loopback network: RFC 6303
+- "0.in-addr.arpa"      # "This network": RFC 1912/5735/6303
+- "10.in-addr.arpa"     # RFC 1918 networks
 - "16.172.in-addr.arpa"
 - "17.172.in-addr.arpa"
 - "18.172.in-addr.arpa"
@@ -227,7 +227,7 @@ bind::config::empty:
 - "30.172.in-addr.arpa"
 - "31.172.in-addr.arpa"
 - "168.192.in-addr.arpa"
-- "64.100.in-addr.arpa"		# "Shared Address Space" RFC 6598
+- "64.100.in-addr.arpa"         # "Shared Address Space" RFC 6598
 - "65.100.in-addr.arpa"
 - "66.100.in-addr.arpa"
 - "67.100.in-addr.arpa"
@@ -291,21 +291,21 @@ bind::config::empty:
 - "125.100.in-addr.arpa"
 - "126.100.in-addr.arpa"
 - "127.100.in-addr.arpa"
-- "254.169.in-addr.arpa"	# Link-local addresses RFC 3927/5735/6303
-- "0.0.192.in-addr.arpa"	# Protocol assignments RFC 5735/5736
-- "2.0.192.in-addr.arpa"	# Reserved for documentation RFC 5735/5737/6303
+- "254.169.in-addr.arpa"        # Link-local addresses RFC 3927/5735/6303
+- "0.0.192.in-addr.arpa"        # Protocol assignments RFC 5735/5736
+- "2.0.192.in-addr.arpa"        # Reserved for documentation RFC 5735/5737/6303
 - "100.51.198.in-addr.arpa"
 - "113.0.203.in-addr.arpa"
-- "8.b.d.0.1.0.0.2.ip6.arpa"	# Reserved for documentation RFC 3849/6303
-- "test"			# Reserved for documentation BCP 32
+- "8.b.d.0.1.0.0.2.ip6.arpa"    # Reserved for documentation RFC 3849/6303
+- "test"                        # Reserved for documentation BCP 32
 - "example"
 - "invalid"
 - "example.com"
 - "example.net"
 - "example.org"
-- "18.198.in-addr.arpa"		# Router benchmarking RFC 2544/5735
+- "18.198.in-addr.arpa"         # Router benchmarking RFC 2544/5735
 - "19.198.in-addr.arpa"
-- "240.in-addr.arpa"		# Old "class E" addresses RFC 5735
+- "240.in-addr.arpa"            # Old "class E" addresses RFC 5735
 - "241.in-addr.arpa"
 - "242.in-addr.arpa"
 - "243.in-addr.arpa"
@@ -320,7 +320,7 @@ bind::config::empty:
 - "252.in-addr.arpa"
 - "253.in-addr.arpa"
 - "254.in-addr.arpa"
-- "1.ip6.arpa"			# IPv6 unassigned addresses RFC 4291
+- "1.ip6.arpa"                  # IPv6 unassigned addresses RFC 4291
 - "3.ip6.arpa"
 - "4.ip6.arpa"
 - "5.ip6.arpa"
@@ -353,14 +353,14 @@ bind::config::empty:
 - "5.e.f.ip6.arpa"
 - "6.e.f.ip6.arpa"
 - "7.e.f.ip6.arpa"
-- "c.f.ip6.arpa"		# "IPv6 ULA" RFC 4193/6303
+- "c.f.ip6.arpa"                # "IPv6 ULA" RFC 4193/6303
 - "d.f.ip6.arpa"
-- "8.e.f.ip6.arpa"		# IPv6 link-local addresses RFC 4291/6303
+- "8.e.f.ip6.arpa"              # IPv6 link-local addresses RFC 4291/6303
 - "9.e.f.ip6.arpa"
 - "a.e.f.ip6.arpa"
 - "b.e.f.ip6.arpa"
-- "c.e.f.ip6.arpa"		# Old IPv6 site-local addresses RFC 3879/6303
+- "c.e.f.ip6.arpa"              # Old IPv6 site-local addresses RFC 3879/6303
 - "d.e.f.ip6.arpa"
 - "e.e.f.ip6.arpa"
 - "f.e.f.ip6.arpa"
-- "ip6.int"			# Old IPv6 inverse mapping RFC 4159
+- "ip6.int"                     # Old IPv6 inverse mapping RFC 4159
