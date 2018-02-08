@@ -18,8 +18,8 @@ bind::config::bind_owns_work_directories: true
 bind::config::rndc_command: "/usr/local/sbin/rndc"
 
 bind::package::packages:
-- bind910
-bind::package::version: "9.10"
+- bind911
+bind::package::version: "9.11"
 
 bind::service::service_name: named
 
