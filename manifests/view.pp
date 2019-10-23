@@ -53,7 +53,7 @@ define bind::view ($view = $name, $ensure = 'present',
     order   => '49',
     content => template('bind/root-hints.conf.erb'),
   }
-  
+
   $explicit_zones = union(union(keys($master_zones), keys($slave_zones)),
 			  keys($other_zones))
 

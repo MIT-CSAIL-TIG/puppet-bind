@@ -18,12 +18,12 @@ bind::config::install_root_hints: false
 # canonical named.conf format (so booleans are "yes" and "no", not YAML
 # true and false).  The more common options are supported directly by
 # parameters of the bind::config class.
-bind::config::options: {}
+bind::config::options:
+  "tcp-listen-queue": "128"
 
 # Example:
 # bind::config::options:
 #   "recursive-clients": "10000"
-#   "additional-from-cache": "no"
 
 #
 ########################################################################
