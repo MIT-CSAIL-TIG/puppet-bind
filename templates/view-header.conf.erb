@@ -1,6 +1,6 @@
 <%
-# Small helper function to deal with options like dnssec-validation and
-# dnssec-lookaside that can be "yes", "no", or "auto".
+# Small helper function to deal with options like dnssec-validation
+# that can be "yes", "no", or "auto".
 def bool_or_string(val)
   case val
     when TrueClass
@@ -28,14 +28,8 @@ view "<%= @view %>" {
 <% unless @recursion.nil? -%>
 	recursion <%= @recursion ? "yes" : "no" %>;
 <% end -%>
-<% unless @additional_from_cache.nil? -%>
-	additional-from-cache <%= @additional_from_cache ? "yes" : "no" %>;
-<% end -%>
 <% unless @dnssec_validation.nil? -%>
 	dnssec-validation <%= bool_or_string(@dnssec_validation) %>;
-<% end -%>
-<% unless @dnssec_lookaside.nil? -%>
-	dnssec-lookaside <%= bool_or_string(@dnssec_lookaside) %>;
 <% end -%>
 <% unless @notify_.nil? -%>
 	notify <%= @notify_ ? "yes" : "no" %>;
