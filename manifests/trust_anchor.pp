@@ -8,10 +8,18 @@ define bind::trust_anchor ($domain = $name, $keys) {
   validate_array($keys)
 
   include bind::config
-  $main_config = $bind::config::main_config
 
-  ensure_resource('concat::fragment', "${main_config}/anchor-begin",
-    { target => $main_config, order => '29', content => "trusted-keys {\n", })
+  $main_config = $bind::config::main_config
+  $version = $bind::package::version
+  $trusted_keys_is_deprecated = (versioncmp($version, '9.15') >= 0)
+
+  if $trusted_keys_is_deprecated {
+    ensure_resource('concat::fragment', "${main_config}/anchor-begin",
+      { target => $main_config, order => '29', content => "dnssec-keys {\n", })
+  } else {
+    ensure_resource('concat::fragment', "${main_config}/anchor-begin",
+      { target => $main_config, order => '29', content => "trusted-keys {\n", })
+  }
   ensure_resource('concat::fragment', "${main_config}/anchor-end",
     { target => $main_config, order => '31', content => "};\n", })
 
