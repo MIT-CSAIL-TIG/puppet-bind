@@ -4,7 +4,7 @@
 # not use this for the root domain; allow BIND to do automatic
 # key management for the root.
 #
-define bind::trust_anchor ($domain = $name, $keys) {
+define bind::trust_anchor ($keys, $domain = $name, $managed = false) {
   validate_array($keys)
 
   include bind::config
@@ -14,12 +14,14 @@ define bind::trust_anchor ($domain = $name, $keys) {
   $trusted_keys_is_deprecated = (versioncmp($version, '9.15') >= 0)
 
   if $trusted_keys_is_deprecated {
-    ensure_resource('concat::fragment', "${main_config}/anchor-begin",
-      { target => $main_config, order => '29', content => "dnssec-keys {\n", })
+    $directive = 'dnssec-keys'
+  } elsif ($managed) {
+    $directive = 'managed-keys'
   } else {
-    ensure_resource('concat::fragment', "${main_config}/anchor-begin",
-      { target => $main_config, order => '29', content => "trusted-keys {\n", })
+    $directive = 'trusted-keys'
   }
+  ensure_resource('concat::fragment', "${main_config}/anchor-begin",
+    { target => $main_config, order => '29', content => "${directive} {\n", })
   ensure_resource('concat::fragment', "${main_config}/anchor-end",
     { target => $main_config, order => '31', content => "};\n", })
 

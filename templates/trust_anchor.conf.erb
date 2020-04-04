@@ -1,6 +1,6 @@
 <% @keys.each do |key| -%>
 <% if @trusted_keys_is_deprecated -%>
-	<%= @domain %> static-key <%= key['flags'] || '257' %> <%= key['protocol'] || '3' %> <%= key['algorithm'] %> "<%= key['key'] %>";
+	<%= @domain %> <%= @managed ? 'initial-key' : 'static-key' %> <%= key['flags'] || '257' %> <%= key['protocol'] || '3' %> <%= key['algorithm'] %> "<%= key['key'] %>";
 <% else -%>
 	<%= @domain %> <%= key['flags'] || '257' %> <%= key['protocol'] || '3' %> <%= key['algorithm'] %> "<%= key['key'] %>";
 <% end -%>
