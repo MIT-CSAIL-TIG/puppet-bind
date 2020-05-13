@@ -14,7 +14,7 @@ define bind::trust_anchor ($keys, $domain = $name, $managed = false) {
   $trusted_keys_is_deprecated = (versioncmp($version, '9.15') >= 0)
 
   if $trusted_keys_is_deprecated {
-    $directive = 'dnssec-keys'
+    $directive = 'trust-anchors'
   } elsif ($managed) {
     $directive = 'managed-keys'
   } else {
