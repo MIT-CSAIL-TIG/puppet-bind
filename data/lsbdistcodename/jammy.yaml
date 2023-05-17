@@ -1,6 +1,9 @@
 ---
 bind::package::packages:
 - bind9
+- bind9-utils
 bind::package::version: "9.18"
 bind::package::documentation_packages:
 - bind9-doc
+# this moved between bionic and jammy
+bind::config::checkconf: /usr/bin/named-checkconf
