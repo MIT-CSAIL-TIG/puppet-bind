@@ -16,18 +16,18 @@
 # and how they work has yet to be defined.
 #
 class bind::config ($ensure, $directory, $root_hints, $install_root_hints,
-		    $log_queries_by_default, $log_channels, $log_categories,
-		    $master_dir, $slave_dir, $keys_dir, $working_dir,
-		    $bind_user, $bind_group, $bind_owns_work_directories,
-		    $tsig_keys, $remote_servers, $acls, $options,
-		    $trusted_keys,
-		    $pid_file = undef, # has compiled-in default
-		    $dump_file = undef, # has compiled-in default
-		    $statistics_file = undef, # has compiled-in default
-		    $checkconf = undef, # skip validation if not defined
-		    $extra = undef, # don't need any extras
-		    $named_conf, $rndc_command,
-		    $views) {
+        $log_queries_by_default, $log_channels, $log_categories,
+        $master_dir, $slave_dir, $keys_dir, $working_dir,
+        $bind_user, $bind_group, $bind_owns_work_directories,
+        $tsig_keys, $remote_servers, $acls, $options,
+        $trusted_keys,
+        $pid_file = undef, # has compiled-in default
+        $dump_file = undef, # has compiled-in default
+        $statistics_file = undef, # has compiled-in default
+        $checkconf = undef, # skip validation if not defined
+        $extra = undef, # don't need any extras
+        $named_conf, $rndc_command,
+        $views) {
 
   # Validate data types first.  These are all on separate lines because
   # the error message only gives a line number, not the actual variable

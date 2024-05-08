@@ -8,8 +8,11 @@
 # way in case there is ever some special configuration that needs to be
 # done.
 #
-class bind::tools ($ensure, $packages, $installing_server,
-		   $tools_conflict_with_server) {
+class bind::tools ($ensure,
+    $packages,
+    $installing_server,
+    $tools_conflict_with_server
+) {
   if ($ensure == 'present' or $ensure == 'latest') {
     if ($tools_conflict_with_server and $installing_server) {
       # do nothing

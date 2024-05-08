@@ -5,21 +5,21 @@
 # reference a specific view name.)
 #
 define bind::view ($view = $name, $ensure = 'present',
-		   $empty = hiera('bind::config::empty'),
-		   $master_zones = {},
-		   $slave_zones = {},
-		   $other_zones = {},
-		   $match_clients = undef,
-		   $match_recursive_only = undef,
-		   $minimal_responses = undef,
-		   $recursion = undef,
-		   $dnssec_validation = undef,
-		   $allow_transfer = undef,
-		   $notify_ = undef,
-		   $also_notify = undef,
-		   $zone_defaults = {},
-		   $extra = undef,
-		  ) {
+      $empty = hiera('bind::config::empty'),
+      $master_zones = {},
+      $slave_zones = {},
+      $other_zones = {},
+      $match_clients = undef,
+      $match_recursive_only = undef,
+      $minimal_responses = undef,
+      $recursion = undef,
+      $dnssec_validation = undef,
+      $allow_transfer = undef,
+      $notify_ = undef,
+      $also_notify = undef,
+      $zone_defaults = {},
+      $extra = undef,
+) {
   include bind::config
   $view_config = "${bind::config::directory}/${view}.conf"
   $main_config = $bind::config::main_config
@@ -55,7 +55,7 @@ define bind::view ($view = $name, $ensure = 'present',
   }
 
   $explicit_zones = union(union(keys($master_zones), keys($slave_zones)),
-			  keys($other_zones))
+        keys($other_zones))
 
   $my_zone_defaults = { view => $view }
   $all_zone_defaults = merge($zone_defaults, $my_zone_defaults)

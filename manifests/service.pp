@@ -19,8 +19,8 @@ class bind::service ($ensure, $service_name) {
   }
 
   service { 'named':
-    name    => $service_name,
     ensure  => $svc_ensure,
+    name    => $service_name,
     enable  => $svc_enable,
     restart => "${bind::config::rndc_command} reconfig",
   }

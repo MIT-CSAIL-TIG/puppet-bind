@@ -13,11 +13,11 @@
 # bind::tools_only to true in Hiera data, then override this setting in
 # the machine classes that will actually run servers.
 #
-class bind ($ensure = 'present', $tools_only) {
+class bind (tools_only, $ensure = 'present') {
   if ($tools_only) {
     anchor { 'bind::begin':
     } -> class { 'bind::tools':
-      ensure => $ensure,
+      ensure            => $ensure,
       installing_server => false,
     } -> anchor { 'bind::end':
     }
@@ -26,7 +26,7 @@ class bind ($ensure = 'present', $tools_only) {
     } -> class { 'bind::package':
       ensure => $ensure,
     } -> class { 'bind::tools':
-      ensure => $ensure,
+      ensure            => $ensure,
       installing_server => true,
     } -> class { 'bind::config':
       ensure => $ensure,
