@@ -1,4 +1,4 @@
-define bind::emptyzones (zones, $view = $name, $ensure = 'present') {
+define bind::emptyzones ($zones, $view = $name, $ensure = 'present') {
   include bind::config
   require bind::zone::empty_db
   $empty_db = $bind::zone::empty_db::db
