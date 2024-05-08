@@ -4,11 +4,11 @@ datadir: data
 hierarchy:
   - name: "LSB Distribution"
     backend: yaml
-    path: "lsbdistcodename/%{::lsbdistcodename}"
+    path: "lsbdistcodename/%{facts.os.distro.codename}"
 
   - name: "OS family"
     backend: yaml
-    path: "osfamily/%{::osfamily}"
+    path: "osfamily/%{facts.os.family}"
 
   - name: "common"
     backend: yaml
