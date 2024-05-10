@@ -5,7 +5,7 @@
 # reference a specific view name.)
 #
 define bind::view ($view = $name, $ensure = 'present',
-      $empty = hiera('bind::config::empty'),
+      $empty = lookup('bind::config::empty'),
       $master_zones = {},
       $slave_zones = {},
       $other_zones = {},
@@ -72,7 +72,9 @@ define bind::view ($view = $name, $ensure = 'present',
   # empty zones are at order 90, because they make a lot of visual
   # clutter
   $emptyzones = delete($empty, $explicit_zones)
-  bind::emptyzones {$view: ensure => $ensure, zones => $emptyzones, }
+  if $emptyzones {
+    bind::emptyzones {$view: ensure => $ensure, zones => $emptyzones, }
+  }
 
   concat::fragment {"${view_config}/trailer":
     target  => $view_config,
