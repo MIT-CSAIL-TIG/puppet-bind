@@ -5,7 +5,7 @@ define bind::emptyzones ($zones, $view = $name, $ensure = 'present') {
 
   # Maybe elide this extra defined type and just construct directly
   # from fragments here?
-  $bind::emptyzones::zones.each |$zone| {
+  $zones.each |$zone| {
     bind::zone::empty { "${view}/${zone}":
       zone => $zone,
       view => $view,
