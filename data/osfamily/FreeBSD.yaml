@@ -1,6 +1,6 @@
 ---
 # Common pathnames
-bind::config::checkconf: "/usr/local/sbin/named-checkconf"
+bind::config::checkconf: "/usr/local/bin/named-checkconf"
 bind::config::directory: "/usr/local/etc/namedb"
 bind::config::keys: "keys"
 bind::config::pid_file: "/var/run/named/pid"
