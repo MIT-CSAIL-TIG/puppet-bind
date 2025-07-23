@@ -1,0 +1,23 @@
+dnssec-policy <%= @policy %> {
+	keys {
+<% if @ksk -%>
+		ksk lifetime <%= @ksk['lifetime'] %> algorithm <%= @ksk['algorithm'] %>;
+		zsk lifetime <%= @zsk['lifetime'] %> algorithm <%= @zsk['algorithm'] %>;
+<% else -%>
+		csk lifetime <%= @csk['lifetime'] %> algorithm <%= @csk['algorithm'] %>;
+<% end -%>
+	};
+<% if @dnskey_ttl -%>
+	dnskey-ttl <%= @dnskey_ttl %>;
+<% end -%>
+<% if @sig_refresh -%>
+	signatures-refresh <%= @sig_refresh %>;
+<% end -%>
+<% if @sig_validity -%>
+	signatures-validity <%= @sig_validity %>;
+<% end -%>
+<% if @dnskey_sig_validity -%>
+	signatures-validity-dnskey <%= @dnskey_sig_validity %>;
+<% end -%>
+};
+
