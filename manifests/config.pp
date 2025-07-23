@@ -15,60 +15,43 @@
 # IP addresses.  Finally, there are keys and log destinations,
 # and how they work has yet to be defined.
 #
-class bind::config ($ensure, $directory, $root_hints, $install_root_hints,
-        $log_queries_by_default, $log_channels, $log_categories,
-        $master_dir, $slave_dir, $keys_dir, $working_dir,
-        $bind_user, $bind_group, $bind_owns_work_directories,
-        $tsig_keys, $remote_servers, $acls, $options,
-        $trusted_keys,
-        $named_conf, $rndc_command,
-        $views,
-        $pid_file = undef, # has compiled-in default
-        $dump_file = undef, # has compiled-in default
-        $statistics_file = undef, # has compiled-in default
-        $checkconf = undef, # skip validation if not defined
-        $extra = undef, # don't need any extras
+class bind::config ($ensure,
+	String $directory,
+	String $root_hints,
+	Boolean $install_root_hints,
+        Boolean $log_queries_by_default,
+	Hash $log_channels,
+	Hash $log_categories,
+        String $master_dir,
+	String $slave_dir,
+	String $keys_dir,
+	String $working_dir,
+        String $bind_user,
+	String $bind_group,
+	Boolean $bind_owns_work_directories,
+        Hash $tsig_keys, Hash $remote_servers, Hash $acls, Hash $options,
+        Hash $trusted_keys,
+        String $named_conf,
+	String $rndc_command,
+        Hash $views,
+        Optional[String] $pid_file, # has compiled-in default
+        Optional[String] $dump_file, # has compiled-in default
+        Optional[String] $statistics_file, # has compiled-in default
+        Optional[String] $checkconf, # skip validation if not defined
+        Optional[String] $extra, # don't need any extras
+	Optional[Hash] $dnssec_policies,
 ) {
 
   # Validate data types first.  These are all on separate lines because
   # the error message only gives a line number, not the actual variable
   # that had the incorrect type of value, so that's is the only way to
   # identify where the problem is.
-  validate_hash($acls)
-  validate_hash($log_channels)
-  validate_hash($log_categories)
-  validate_hash($options)
-  validate_hash($trusted_keys)
-  validate_hash($remote_servers)
-  validate_hash($tsig_keys)
-  validate_hash($views)
   validate_absolute_path($directory)
   if $pid_file != undef {
     validate_absolute_path($pid_file)
   }
   if $checkconf != undef {
     validate_absolute_path($checkconf)
-  }
-  if $dump_file != undef {
-    validate_string($dump_file) # may be relative to $working_dir
-  }
-  if $statistics_file != undef {
-    validate_string($statistics_file) # ditto
-  }
-  validate_bool($install_root_hints)
-  validate_bool($log_queries_by_default)
-  validate_bool($bind_owns_work_directories)
-  validate_string($root_hints)
-  validate_string($master_dir)
-  validate_string($slave_dir)
-  validate_string($keys_dir)
-  validate_string($working_dir)
-  validate_string($bind_user)
-  validate_string($bind_group)
-  validate_string($named_conf)
-  validate_string($rndc_command)
-  if $extra != undef {
-    validate_string($extra)
   }
 
   # named will resolve these automatically relative to its working directory.
@@ -227,6 +210,10 @@ class bind::config ($ensure, $directory, $root_hints, $install_root_hints,
   create_resources('bind::acl', $acls, {})
 
   create_resources('bind::trust_anchor', $trusted_keys, {})
+
+  if defined($dnssec_policies) {
+    create_resoutces('bind::dnssec_policy', $dnssec_policies, {})
+  }
 
   # include directives for the individual view configurations get inserted
   # here
